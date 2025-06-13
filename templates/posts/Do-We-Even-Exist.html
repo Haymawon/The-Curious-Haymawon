@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Do We Even Exist? | The Curious Haymawon</title>
+    <link
+      rel="shortcut icon"
+      href="/templates/favicon.jpg"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #8b5fbf;
+        --secondary: #ff9a8b;
+        --accent: #4a90e2;
+        --light: #f8f5f2;
+        --dark: #2d2a32;
+        --text: #333333;
+        --gray: #a0a0a0;
+        --card-bg: #ffffff;
+        --pink: #fa86c5;
+        --transition: all 0.3s ease;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --radius: 12px;
+        --cozy-font: "Georgia", serif;
+      }
+
+      .dark-mode {
+        --light: #1e1e24;
+        --dark: #2d2a32;
+        --text: #e8e8e8;
+        --gray: #a0a0a0;
+        --card-bg: #2d2a32;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+        color: var(--text);
+        line-height: 1.6;
+        transition: var(--transition);
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body.dark-mode {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      }
+
+      /* Floating particles background */
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(139, 95, 191, 0.3);
+        animation: float 15s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) translateX(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) translateX(20px) rotate(180deg);
+        }
+        100% {
+          transform: translateY(0) translateX(0) rotate(360deg);
+        }
+      }
+
+      /* Container */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header & Navbar */
+      header {
+        padding: 20px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      body.dark-mode header {
+        background: rgba(45, 42, 50, 0.85);
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        font-family: var(--cozy-font);
+        text-decoration: none;
+      }
+
+      .logo i {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 500;
+        position: relative;
+        padding: 5px 0;
+        transition: var(--transition);
+      }
+
+      .nav-links a:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--pink);
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover:after,
+      .nav-links a.active:after {
+        width: 100%;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .search-container {
+        position: relative;
+      }
+
+      .search-container input {
+        padding: 10px 15px 10px 40px;
+        border: none;
+        background: var(--light);
+        border-radius: 30px;
+        width: 200px;
+        transition: var(--transition);
+        font-size: 0.9rem;
+        box-shadow: var(--shadow);
+      }
+
+      .search-container input:focus {
+        width: 250px;
+        outline: none;
+        box-shadow: 0 0 0 2px var(--secondary);
+      }
+
+      .search-container i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray);
+      }
+
+      .dark-mode-toggle {
+        background: none;
+        border: none;
+        font-size: 1.3rem;
+        cursor: pointer;
+        color: var(--text);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--light);
+      }
+
+      .dark-mode-toggle:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Hero Section */
+      .post-hero {
+        padding: 100px 0 50px;
+        text-align: center;
+        position: relative;
+      }
+
+      .post-hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        font-family: var(--cozy-font);
+        line-height: 1.1;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .post-hero p {
+        font-size: 1.3rem;
+        max-width: 700px;
+        margin: 0 auto 40px;
+        color: var(--gray);
+        font-style: italic;
+      }
+
+      .post-meta {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+        color: var(--gray);
+        font-size: 0.9rem;
+        margin-top: 20px;
+      }
+
+      .post-meta span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .post-tag {
+        display: inline-block;
+        padding: 8px 20px;
+        background: rgba(139, 95, 191, 0.1);
+        color: var(--primary);
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-top: 20px;
+      }
+
+      /* Featured Image */
+      .featured-image {
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin: 40px 0;
+        box-shadow: var(--shadow);
+        max-height: 600px;
+      }
+
+      .featured-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Post Content */
+      .post-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 0;
+      }
+
+      .post-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 25px;
+      }
+
+      .post-content h2 {
+        font-size: 2rem;
+        margin: 50px 0 20px;
+        font-family: var(--cozy-font);
+        color: var(--primary);
+      }
+
+      .post-content h3 {
+        font-size: 1.5rem;
+        margin: 40px 0 15px;
+        font-family: var(--cozy-font);
+        color: var(--primary);
+      }
+
+      .post-content blockquote {
+        border-left: 4px solid var(--primary);
+        padding: 20px 30px;
+        margin: 40px 0;
+        background: rgba(139, 95, 191, 0.05);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        font-style: italic;
+        font-size: 1.2rem;
+        position: relative;
+      }
+
+      .post-content blockquote:before {
+        content: "“";
+        position: absolute;
+        top: -20px;
+        left: 10px;
+        font-size: 4rem;
+        color: rgba(139, 95, 191, 0.1);
+        font-family: Georgia, serif;
+      }
+
+      .post-content img {
+        max-width: 100%;
+        border-radius: var(--radius);
+        margin: 30px 0;
+        box-shadow: var(--shadow);
+      }
+
+      /* Author Section */
+      .author-section {
+        background: var(--card-bg);
+        padding: 50px 30px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin: 60px auto;
+        max-width: 500px; /* wider */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 25px;
+      }
+
+      .author-image {
+        width: 160px; /* bigger */
+        height: 160px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .author-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .author-info h3 {
+        font-size: 2rem; /* bigger */
+        margin: 12px 0 6px;
+        font-family: var(--cozy-font);
+      }
+
+      .author-info p {
+        color: var(--gray);
+        font-size: 1rem; /* slightly bigger */
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 18px; /* slightly more spacing */
+        margin-top: 10px;
+      }
+
+      .social-links a {
+        width: 46px; /* bigger icons */
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--light);
+        color: var(--primary);
+        transition: var(--transition);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        font-size: 1.2rem; /* larger icons inside */
+        text-decoration: none;
+      }
+
+      .social-links a:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      /* Share Section */
+      .share-section {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin: 40px 0;
+        text-align: center;
+      }
+
+      .share-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: var(--primary);
+        font-family: var(--cozy-font);
+      }
+
+      .share-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .share-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 25px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+      }
+
+      .share-btn.twitter {
+        background: #1da1f2;
+        color: white;
+      }
+
+      .share-btn.telegram {
+        background: #0088cc;
+        color: white;
+      }
+
+      .share-btn.facebook {
+        background: #4267b2;
+        color: white;
+      }
+
+      .share-btn.pinterest {
+        background: #e60023;
+        color: white;
+      }
+
+      .share-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Related Posts */
+      .related-posts {
+        padding: 60px 0;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+        position: relative;
+        padding-bottom: 15px;
+        font-family: var(--cozy-font);
+      }
+
+      .section-title:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: var(--secondary);
+        border-radius: 3px;
+      }
+
+      .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .post-card {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .post-card-image {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .post-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .post-card:hover .post-card-image img {
+        transform: scale(1.1);
+      }
+
+      .post-card-content {
+        padding: 25px;
+      }
+
+      .post-card-content h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        font-family: var(--cozy-font);
+      }
+
+      .post-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .post-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .post-tag-sm {
+        display: inline-block;
+        padding: 3px 10px;
+        background: rgba(139, 95, 191, 0.1);
+        color: var(--primary);
+        border-radius: 30px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 70px 0 30px;
+        position: relative;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 50px;
+      }
+
+      .footer-col h3 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+        font-family: var(--cozy-font);
+      }
+
+      .footer-col h3:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--secondary);
+      }
+
+      .footer-col p {
+        color: #bbb;
+        margin-bottom: 20px;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 12px;
+      }
+
+      .footer-links a {
+        color: #bbb;
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        color: var(--secondary);
+        transform: translateX(5px);
+      }
+
+      .footer-social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .footer-social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        transition: var(--transition);
+        text-decoration: none;
+      }
+
+      .footer-social-links a:hover {
+        background: var(--secondary);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #bbb;
+        font-size: 0.9rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .post-hero h1 {
+          font-size: 2.8rem;
+        }
+
+        .author-section {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .post-hero h1 {
+          font-size: 2.3rem;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .newsletter {
+          padding: 40px 20px;
+        }
+
+        .post-content {
+          padding: 20px 0;
+        }
+
+        .post-content h2 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+    <!-- Header & Navbar -->
+    <header>
+      <div class="container">
+        <nav class="navbar">
+          <a class="logo" href="/templates/index.html">
+            <i class="fas fa-feather-alt"></i>
+            Haymawon
+          </a>
+          <ul class="nav-links">
+            <li><a href="/templates/index.html">Home</a></li>
+            <li><a class="active" href="/templates/topics.html">Topics</a></li>
+            <li><a href="/templates/featured.html">Featured Post</a></li>
+            <li><a href="/templates/games_music.html">Games & Music</a></li>
+            <li><a href="/templates/contact.html">Contact</a></li>
+          </ul>
+          <div class="nav-actions">
+            <div class="search-container">
+              <i class="fas fa-search"></i>
+              <input
+                id="searchInput"
+                placeholder="Search posts..."
+                type="text"
+              />
+            </div>
+            <button class="dark-mode-toggle" id="darkModeToggle">
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="post-hero">
+      <div class="container">
+        <span class="post-tag">Philosophy &amp; Existentialism</span>
+
+        <h1>Do We Even Exist?</h1>
+        <p>A Deep Dive into the Strange Mystery of Being Human</p>
+        <div class="post-meta">
+          <span><i class="far fa-calendar"></i> June 11, 2025</span>
+          <span><i class="far fa-clock"></i> 6 min read</span>
+        </div>
+      </div>
+    </section>
+    <!-- Featured Image -->
+    <div class="container">
+      <div class="featured-image">
+        <img src="/templates/A-person-who-thinks-all-the-time.jpg" />
+      </div>
+    </div>
+    <!-- Post Content -->
+    <div class="container">
+      <div class="post-content">
+        <h2>What Are We?</h2>
+        <p>
+          What are we? No, seriously—what are we? Flesh? Dust? Code? Some cosmic
+          joke? Every day we wake up, blink twice, and get pulled into this
+          machine-world of sound, color, movement, thoughts. We look at our
+          hands and just assume they’re real. But if you sit long enough,
+          without distraction, that certainty starts to wobble.
+        </p>
+
+        <h2>Do we even exist?</h2>
+
+        <p>
+          We walk through cities built from concrete, glass, wires, and
+          software. We type into glowing rectangles and speak into plastic
+          shells. Things respond. Lights change. Programs run. Entire systems
+          move in silence behind every tap. But who made all this? How? How did
+          humans go from caves and sticks to satellites and AI? How does a human
+          mind even know something will work before they build it?
+        </p>
+
+        <h2>How do we know anything?</h2>
+
+        <p>
+          You might be holding a phone right now. Swipe. Scroll. Read. Behind
+          that glass is a matrix of microscopic metal pathways, firing
+          electricity in pulses too fast for you to feel. But it knows. The
+          machine reacts. A human built this. A person. Not a god. Not an alien.
+          Some person with a heart and a brain and fears and childhood memories.
+          Somehow, they figured out that this piece of metal, this wire, that
+          code—if arranged just right—would make what you're holding.
+        </p>
+        <strong>But How?</strong>
+        <p>
+          At some point, someone looked at the stars and thought, I wonder if I
+          can talk to another mind through invisible waves. And now we call that
+          Wi-Fi. We live in a time where invisible ideas shape physical reality.
+          We’re surrounded by proof of human belief turning into actual things.
+          Planes fly because someone once believed metal could float on air.
+        </p>
+        <strong>What kind of creature even thinks like that?</strong>
+        <p>
+          The world isn’t just a place anymore. It’s a mind. A web of shared
+          hallucinations we all agreed on. Countries. Time. Rules. Codes.
+          Brands. Apps. All of it built from thought. Not from earth or bone,
+          but from belief. Someone once sat alone, staring into nothing, and
+          dreamed up what you’re now holding in your hand.
+        </p>
+
+        <p>
+          That should feel impossible. And yet it happens. Again and again. We
+          ask: how do these things work? But behind every working thing is a
+          deeper, more terrifying question—why does it work at all? Why does
+          code turn into images? Why do spoken words trigger emotion? Why do we
+          feel love? Hate? Emptiness? How does a signal from a screen make your
+          chest hurt, or your eyes tear up?
+        </p>
+
+        <h2>This is more than science. This is myth.</h2>
+        <p>
+          You could say “because of neurons,” or “because of logic gates,” or
+          “because of design.” But zoom in further and it all collapses. Down to
+          particles that don’t behave. Down to a quantum foam that’s more
+          probability than matter. Everything is shimmering uncertainty
+          pretending to be solid. Even your thoughts aren’t really yours. They
+          just appear. Uninvited.
+        </p>
+
+        <li><strong>You didn’t choose your first language.</strong></li>
+        <li><strong>You didn’t pick your parents.</strong></li>
+        <li><strong>You didn’t decide to be born.</strong></li>
+
+        <p>
+          And yet here you are, in a body you didn’t make, in a world you didn’t
+          build, looking at machines you don’t fully understand, still
+          pretending it all makes sense. Maybe that’s the deepest magic of
+          humanity—not understanding, but acting like we do.
+        </p>
+        <p>
+          Because maybe none of it really makes sense. Maybe we’re standing on a
+          spinning rock in cold space, building glass castles in a digital sky
+          to distract ourselves from the fact that we don’t know why we’re here.
+        </p>
+        <p>
+          Maybe we’re just echoes of something deeper. Maybe consciousness is
+          just the light coming through a crack in the cave wall. Or maybe, just
+          maybe, we’re the universe watching itself in the mirror for the first
+          time—confused, fascinated, and trying not to blink. Because if we
+          blink too long, we might remember: None of this had to be. And yet, it
+          is. And that… is the strangest thing of all.
+        </p>
+
+        <h2>But it doesn’t stop there.</h2>
+        <p>
+          Even stranger than “it is” is the fact that we care. That we cry when
+          things go wrong. That we laugh even when nothing is funny. That we
+          paint and write and build things that don’t feed us, clothe us, or
+          save us—but somehow matter more than food or shelter ever could. Why
+          do we care about meaning, when we could’ve just eaten, survived, died?
+        </p>
+        <p>
+          Think about music. Just waves. Vibrations in the air. No substance, no
+          form. But when arranged right, they move us to tears. How can a
+          sound—just a sound—feel like heartbreak? How can lines of text on a
+          page make your chest ache with the memory of someone you lost? These
+          are not features of survival. These are features of something else
+          entirely.
+        </p>
+
+        <h2>What are we really?</h2>
+        <p>
+          We are not just machines. If we were, we’d never write poetry. No
+          algorithm needs a song. No neuron requires a painting. But here we
+          are—bleeding onto canvases, whispering our souls into microphones,
+          pouring our pain into code and color and rhythm.
+        </p>
+        <h2>We are haunted by the question: What is all this for?</h2>
+        <p>
+          And still, we build. We build like it means something. Cities.
+          Sculptures. Languages. Dreams.
+        </p>
+        <p>We build gods out of pixels.</p>
+        <p>We build futures out of blueprints.</p>
+        <p>We build ourselves out of stories.</p>
+        <p>
+          But stories break too. There are nights when everything crumbles—when
+          the tech stops, the light fades, and all you're left with is a mirror
+          and a question: Who am I when nothing is working? Not the phone. Not
+          the plan. Not even the body. And if you sit with that silence long
+          enough, a strange thought appears:
+          <li><strong>Maybe existence isn’t about understanding.</strong></li>
+          <li><strong>Maybe it’s about witnessing.</strong></li>
+        </p>
+        <p>
+          Because despite all our questions, despite all the terror of not
+          knowing—we do see. We do hear. We do feel. We touch the skin of the
+          world with trembling hands and call it “real.” Maybe that’s all we
+          need. You ask: how do humans make all this? How do they know it’ll
+          work? The honest answer? They don’t. But they try anyway. They guess.
+          They fail. They risk. They dream. And something about that—about the
+          trying—feels more real than any proof ever could. So maybe we exist
+          not because we think—but because we try. We dream and build and love
+          and break and cry and rebuild. And through it all, the world keeps
+          whispering, You are here. You are here. You are here. Even if nothing
+          makes sense, even if the machines stop, even if everything you know
+          falls apart— You are still here. And maybe that’s enough. Maybe that’s
+          the only truth that matters.
+        </p>
+
+        <h2>So... Do we even exist?</h2>
+        <p>
+          <strong>
+            Yes. And somehow, that’s both the simplest and most impossible thing
+            of all.</strong
+          >
+        </p>
+      </div>
+      <!-- Share Section -->
+      <h3
+        style="
+          font-size: 1.5rem;
+          margin-bottom: 20px;
+          color: var(--primary);
+          font-family: var(--cozy-font);
+        "
+      >
+        Enjoyed this article? Share it!
+      </h3>
+      <div class="share-buttons">
+        <button class="share-btn twitter" onclick="shareOnTwitter()">
+          <i class="fab fa-twitter"></i> Twitter
+        </button>
+        <button class="share-btn telegram" onclick="shareOnTelegram()">
+          <i class="fab fa-telegram"></i> Telegram
+        </button>
+        <button class="share-btn facebook" onclick="shareOnFacebook()">
+          <i class="fab fa-facebook-f"></i> Facebook
+        </button>
+        <button class="share-btn pinterest" onclick="shareOnPinterest()">
+          <i class="fab fa-pinterest"></i> Pinterest
+        </button>
+      </div>
+    </div>
+    <!-- Author Section -->
+    <div class="author-section">
+      <div class="author-image">
+        <img alt="Haymawon" src="/templates/Haymawon.jpg" />
+      </div>
+      <div class="author-info">
+        <h3>Haymawon</h3>
+        <p>
+          Writer and existential witness. I study the absurdity of life, and
+          leave pieces of it here, one sentence at a time.
+        </p>
+        <div class="social-links">
+          <a href="https://x.com/Haymawon" target="_blank"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a href="https://www.instagram.com/haymawonn/" target="_blank"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="https://pinterest.com/haymawon" target="_blank"
+            ><i class="fab fa-pinterest"></i
+          ></a>
+          <a href="https://t.me/Haymawon" target="_blank"
+            ><i class="fab fa-telegram"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-col">
+            <h3>About Haymawon</h3>
+            <p>
+              A personal blog where I share my thoughts on lifestyle,
+              creativity, and finding joy in everyday moments.
+            </p>
+            <div class="footer-social-links">
+              <a href="https://x.com/Haymawon" target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="https://www.instagram.com/haymawonn/" target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://pinterest.com/haymawon" target="_blank"
+                ><i class="fab fa-pinterest"></i
+              ></a>
+              <a href="https://t.me/Haymawon" target="_blank"
+                ><i class="fab fa-telegram"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="/templates/index.html"
+                  ><i class="fas fa-chevron-right"></i> Home</a
+                >
+              </li>
+              <li>
+                <a href="/templates/about.html"
+                  ><i class="fas fa-chevron-right"></i> About Me</a
+                >
+              </li>
+
+              <li>
+                <a href="/templates/topics.html"
+                  ><i class="fas fa-chevron-right"></i> Topics</a
+                >
+              </li>
+              <li>
+                <a href="/templates/contact.html"
+                  ><i class="fas fa-chevron-right"></i> Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Popular Tags</h3>
+            <div class="post-tags">
+              <span class="post-tag-sm">Lifestyle</span>
+              <span class="post-tag-sm">Food</span>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h3>Contact Me</h3>
+            <ul class="footer-links">
+              <li>
+                <a
+                  href="mailto:haymawon009@gmail.com?subject=Hey%20Haymawon&body=I%20love%20your%20website!"
+                >
+                  <i class="fas fa-envelope"></i> haymawon009@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="https://t.me/Three_am_thoughtss" target="_blank"
+                  ><i class="fab fa-telegram"></i> Join Telegram Channel</a
+                >
+              </li>
+              <li>
+                <a href="https://x.com/Haymawon" target="_blank"
+                  ><i class="fab fa-twitter"></i> Follow on Twitter</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          © 2023 Haymawon's Cozy Corner. All rights reserved.
+        </div>
+      </div>
+    </footer>
+    <script>
+      let blogPosts = [];
+
+      fetch("../posts.json") // adjust path if needed
+        .then((response) => response.json())
+        .then((data) => {
+          blogPosts = data.posts;
+          displayPosts();
+        })
+        .catch((error) => {
+          console.error("Error loading posts.json:", error);
+        });
+      // Create floating particles
+      function createParticles() {
+        const particlesContainer = document.getElementById("particles");
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement("div");
+          particle.classList.add("particle");
+
+          // Random properties
+          const size = Math.random() * 10 + 5;
+          const posX = Math.random() * 100;
+          const posY = Math.random() * 100;
+          const delay = Math.random() * 10;
+          const duration = Math.random() * 10 + 15;
+
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          particle.style.left = `${posX}%`;
+          particle.style.top = `${posY}%`;
+          particle.style.animationDelay = `${delay}s`;
+          particle.style.animationDuration = `${duration}s`;
+
+          particlesContainer.appendChild(particle);
+        }
+      }
+
+      // Dark Mode Toggle
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      // Check for saved theme preference
+      const currentTheme = localStorage.getItem("theme");
+      if (currentTheme === "dark") {
+        body.classList.add("dark-mode");
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+
+      darkModeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark");
+          darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+          localStorage.setItem("theme", "light");
+          darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+      });
+
+      // Share functions
+      function shareOnTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(
+          "Check out this amazing article on slow living by Haymawon"
+        );
+        window.open(
+          `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+          "_blank"
+        );
+      }
+
+      function shareOnTelegram() {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(
+          "How to Read Tarot: A Straightforward Guide"
+        );
+        window.open(`https://t.me/share/url?url=${url}&text=${text}`, "_blank");
+      }
+
+      function shareOnFacebook() {
+        const url = encodeURIComponent(window.location.href);
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+          "_blank"
+        );
+      }
+
+      function shareOnPinterest() {
+        const url = encodeURIComponent(window.location.href);
+        const media = encodeURIComponent(
+          "/templates/tarot.jpg" // Adjust path if needed
+        );
+        const description = encodeURIComponent(
+          "How to Read Tarot: A Straightforward Guide"
+        );
+        window.open(
+          `https://pinterest.com/pin/create/button/?url=${url}&media=${media}&description=${description}`,
+          "_blank"
+        );
+      }
+
+      // Initialize page
+      document.addEventListener("DOMContentLoaded", () => {
+        createParticles();
+      });
+    </script>
+  </body>
+</html>
