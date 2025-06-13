@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Nunito", sans-serif;
+  background: linear-gradient(135deg, #fff0f7, #f0f8ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+.game-container {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.cell {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fef2f8;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.cell:hover {
+  background: #ffe0ef;
+}
+.status {
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #e91e63;
+}
+button {
+  padding: 10px 20px;
+  background: #e91e63;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+button:hover {
+  background: #d81b60;
+}
