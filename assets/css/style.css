@@ -466,9 +466,9 @@ body.dark-mode header {
 }
 
 .post-tag-sm {
-  display: inline-block;
+   display: inline-block;
   padding: 3px 10px;
-  background: rgba(139, 95, 191, 0.1);
+  background: rgba(122, 155, 118, 0.1);
   color: var(--primary);
   border-radius: 30px;
   font-size: 0.75rem;
