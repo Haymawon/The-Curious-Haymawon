@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const blogPosts = [
   {
     id: 1,
-    filename: "/templates/posts/food-and-culture.html",
+    filename: "/posts/food-and-culture.html",
     title: "The Timeless Joy of Traditional Home Cooking",
     excerpt:
       "Discover how ancestral recipes, family rituals, and handmade meals connect us to our roots, nourish our bodies, and create lasting memories across generations.",
@@ -34,7 +34,7 @@ const blogPosts = [
   },
   {
     id: 2,
-    filename: "/templates/posts/how-to-read-tarot.html",
+    filename: "/posts/how-to-read-tarot.html",
     title: "How to Read Tarot: A Straightforward Guide",
     excerpt:
       "No fluff, no mystical gatekeeping—just a clear, honest, and practical explanation of how to read tarot cards, even if you’ve never touched a deck in your life.",
@@ -47,7 +47,7 @@ const blogPosts = [
       "Self-Discovery",
       "Personal Growth",
     ],
-    image: "/images/tarot.jpg",
+    image: "tarot.jpg",
 
     readTime: 8,
   },
