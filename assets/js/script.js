@@ -47,7 +47,7 @@ const blogPosts = [
       "Self-Discovery",
       "Personal Growth",
     ],
-    image: "tarot.jpg",
+    image: "/tarot.jpg",
 
     readTime: 8,
   },
